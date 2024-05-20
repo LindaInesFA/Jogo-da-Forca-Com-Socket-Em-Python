@@ -29,13 +29,16 @@ dicionarioDeDados = {
     "status":False
     }
 
-def senData(dicionario):
-    data_bytes = pickle.dumps(dicionario)
-    conexao.sendall(data_bytes)
+#função para enviar dados
+def sendData(dicionario):
+    data_bytes = pickle.dumps(dicionario) #pickle módulo implementa protocolos binários para serializar e desserializar uma estrutura de objeto Python
+    conexao.sendall(data_bytes) #sendall é um método de alto nível somente em Python que envia todo o buffer que você passa ou lança uma exceção.
 
+#função para receber dados
 def receive():
     mensagemRecebida = conexao.recv(1024)
-    return mensagemRecebida.decode('UTF-8')
+    return mensagemRecebida.decode('UTF-8') #decode('UTF-8') é usada para converter bytes em objeto string.
+
 
 def criarLista(pista):
     for letra in pista:
@@ -85,7 +88,7 @@ while True:
             dicionarioDeDados['mensagem']= "Digite 'iniciar' para iniciar um novo jogo"
             dicionarioDeDados['error']= True
             dicionarioDeDados['status']= True
-            senData(dicionarioDeDados) # ENVIA PARA O CLIENTE OS DADOS
+            sendData(dicionarioDeDados) # ENVIA PARA O CLIENTE OS DADOS
 
 
         # VERIFICA SE HÁ UMA RESPOSTA GERADA
@@ -131,9 +134,11 @@ while True:
                 dicionarioDeDados['error']= False
                 dicionarioDeDados['status']= True
 
-            senData(dicionarioDeDados) # ENVIA PARA O CLIENTE OS DADOS
+            sendData(dicionarioDeDados) # ENVIA PARA O CLIENTE OS DADOS
+
+            print(dicionarioDeDados)
         else:
-            senData(dicionarioDeDados)
+            sendData(dicionarioDeDados)
 
 #---------------- fim do protocolo --------------
 

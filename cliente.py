@@ -24,7 +24,7 @@ mensagemRecebida = {
     "status":True # inicializa como status para entrar na PERGUNTA correta
     }
 
-def senData(data):
+def sendData(data):
     conexao_tcp.sendall(data.encode('UTF-8')) # Codifica a mensagem para UTF-8
 
 def receive():
@@ -44,7 +44,7 @@ while True:
     else:
         mensagemDigitada = input("\nDIGITE UMA \033[1;32mLETRA\33[0;0m PARA JOGAR OU \033[1;33mreiniciar\33[0;0m PARA UMA NOVA PARTIDA: ")
 
-    senData(mensagemDigitada)  # Envio a mensagem para o servidor
+    sendData(mensagemDigitada)  # Envio a mensagem para o servidor
 
     mensagemRecebida = receive()
 
